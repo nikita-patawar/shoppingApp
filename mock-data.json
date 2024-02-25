@@ -244,5 +244,11 @@
      "users":[{
        "email":"nikita@gmail.com",
        "password":"12345"
-     }]
+     },{
+        "email":"praji@gmail.com",
+       "password":"12345"
+     }],
+    "registrationDetails":[{
+        
+    }] 
    }

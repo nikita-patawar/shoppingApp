@@ -1,0 +1,9 @@
+<div class="product-list">
+   @if (all_products){
+        @for (product of all_products; track product.id) {
+            <app-product [product]="product"></app-product>
+        } @empty {
+            Empty list of product
+        }
+   }
+</div>

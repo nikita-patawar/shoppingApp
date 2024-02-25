@@ -82,7 +82,7 @@
 
 .login-image-container {
 
-  padding: 7%;
+  //padding: 7%;
 
   background-size: cover;
 
@@ -141,37 +141,37 @@
 
 }
 }
-// @media only screen and (min-width: 600px) {
+@media only screen and (max-width: 600px) {
 
-//   .flex-container {
+  .flex-container {
 
-//       padding-top: 0%;
+      padding-top: 0%;
 
-//       flex-direction: column;
+      flex-direction: column;
 
-//   }
-//   .flex-item-left {
+  }
+  .flex-item-left {
 
-//     width: 100%;
+    width: 100%;
 
-//     border-radius: 0;
+    border-radius: 0;
 
-//     box-shadow: none;
+    box-shadow: none;
 
-// }
+}
 
-// .flex-item-right {
+.flex-item-right {
 
-//     width: 100%;
+    width: 100%;
 
-// }
-// .login-image-container {
+}
+.login-image-container {
 
-//   margin: 0px auto;
+  margin: 0px auto;
 
-//   margin-left: 34%;
+  margin-left: 34%;
 
-//   padding: 1.5%;
+  padding: 1.5%;
 
-// }
-// }
+}
+}

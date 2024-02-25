@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="flex-container">
-    <div class="flex-item-left  mat-elevation-z3">
+    <div class="flex-item-left mat-elevation-z3">
       <div class="login-image-container">
 
         <img alt="Company Name Logo" src="../../../assets/shopping.png" class="login-image-size" />
@@ -18,7 +18,7 @@
               <span>Log In </span>
   
             </mat-toolbar>
-            <form class="login-form" [formGroup]="createLoginForm">
+            <form class="login-form" [formGroup]="createLoginForm" (ngSubmit)="onSubmit()">
   
               <mat-form-field appearance="outline">
   

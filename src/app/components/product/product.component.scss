@@ -1,0 +1,36 @@
+mat-card {
+    max-width: 400px;
+    margin: 16px;
+  }
+  
+  img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  .product-image{
+    width: 300px;
+    height: 300px;
+
+  }
+  
+  mat-card-content {
+    text-align: center;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    margin: 8px;
+  }
+
+  .product-description{
+    overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Adjust the number of lines (in this case, 3) to control the number of characters displayed */
+  max-height: 54px; /* Adjust based on the number of lines and font size */
+  }

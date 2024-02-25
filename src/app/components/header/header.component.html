@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+    <span class="app-title">Lets Do Shopping</span>
+
+    <div class="spacer"></div>
+
+    <div class="header-buttons">
+        @if(!isLoggedIn()){
+        <button mat-raised-button color="accent">Login</button>
+        }
+        @if(isLoggedIn()){
+            <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
+            <!-- Add more buttons as needed -->
+            }
+            @if(!isLoggedIn()){
+                <button mat-raised-button color="accent"(click)="register()">Register</button>
+                }
+    </div>
+    <!-- <div class="header-buttons">
+        @if(isLoggedIn()){
+        <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
+       
+        }
+    </div>
+    <div class="header-buttons">
+        @if(!isLoggedIn()){
+        <button mat-raised-button color="accent"(click)="register()">Register</button>
+        }
+    </div> -->
+</mat-toolbar>

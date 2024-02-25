@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="flex-container">
+    <div class="flex-item-left mat-elevation-z3">
+      <div class="login-image-container">
+        <img alt="Company Name Logo" src="../../../assets/shopping.png" class="login-image-size" />
+      </div>
+      <div class="main-div">
+        <mat-card class="mat-elevation-z3">
+          <mat-card-content>
+            <mat-toolbar class="toolbar">
+                <span>Register</span>
+            </mat-toolbar>
+            <div class="registration-form">
+              <form class="registratiom-form" [formGroup]="createRegistrationForm" >
+                <mat-form-field appearance="outline">
+                  <mat-label>Email Id:</mat-label>
+                   <input type="email" matInput formControlName="userName">
+                </mat-form-field>
+              </form>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      </div>
+  </div>
+</div>
