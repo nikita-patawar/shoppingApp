@@ -1,29 +1,106 @@
 <mat-toolbar color="primary">
-    <span class="app-title">Lets Do Shopping</span>
-
-    <div class="spacer"></div>
-
-    <div class="header-buttons">
-        @if(!isLoggedIn()){
-        <button mat-raised-button color="accent">Login</button>
-        }
-        @if(isLoggedIn()){
-            <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
-            <!-- Add more buttons as needed -->
-            }
-            @if(!isLoggedIn()){
-                <button mat-raised-button color="accent"(click)="register()">Register</button>
-                }
-    </div>
-    <!-- <div class="header-buttons">
-        @if(isLoggedIn()){
-        <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
-       
-        }
-    </div>
-    <div class="header-buttons">
-        @if(!isLoggedIn()){
-        <button mat-raised-button color="accent"(click)="register()">Register</button>
-        }
-    </div> -->
+  <span class="app-title">Lets Do Shopping</span>
+  <div class="spacer"></div>
+  <div class="header-buttons">
+    @if(!isLoggedIn()){
+    <button mat-raised-button color="accent" (click)="logIn()">Login</button>
+    }
+    @if(isLoggedIn()){
+    <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
+    <!-- Add more buttons as needed -->
+    }
+    @if(!isLoggedIn()){
+    <button mat-raised-button color="accent" (click)="register()">Register</button>
+    }
+  </div>
 </mat-toolbar>
+
+
+
+
+<!-- <div class="wrapper">
+  <div class="flex-container">
+    <div class="flex-item-right mat-elevation-z3">
+      <div class="loginImg"></div>
+      <div class="container"> <span class="tsName">TargetSolutions</span> </div> <mat-card class="main-div">
+        <mat-card-content> <br> <span>
+            <h2 class="headerSpan">User Name Registration</h2>
+          </span>
+          <form class="login-form" [formGroup]="newUser" (submit)="submit()">
+             <mat-form-field appearance="outline">
+                <mat-label>Create User Name *</mat-label> <input type="text" matInput formControlName="userName">
+                <mat-error *ngIf="newUser.controls['userName'].hasError('required')"> <mat-icon>error</mat-icon> User Name
+                required </mat-error> 
+              </mat-form-field>
+               <mat-form-field appearance="outline"> <mat-label>New Password
+                  *</mat-label> <input type="password" matInput formControlName="password"> <mat-error
+                  *ngIf="newUser.controls['password'].hasError('required')"> <mat-icon>error</mat-icon> Password required
+                </mat-error> 
+            </mat-form-field>
+            <div class="req-div">
+              <div> <mat-list> <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].value === null || newUser.controls['password'].value === '' ? '' : isMinLength === false ? 'icon-cancel' : 'icon-success' }} required-checks">{{
+                      newUser.controls['password'].value === null || newUser.controls['password'].value === '' ?
+                      'radio_button_unchecked' : isMinLength === false ? 'cancel' : 'check_circle' }}</mat-icon> <span>
+                      Minimum 8 character</span> </mat-list-item>
+                       <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].hasError('required') || newUser.controls['password'].hasError('hasSmallCase') ? '' : 'icon-success'}}">{{
+                      newUser.controls['password'].hasError('required') ||
+                      newUser.controls['password'].hasError('hasSmallCase') ? 'radio_button_unchecked' : 'check_circle'
+                      }}</mat-icon> <span> 1 lowercase letter (abc)</span> </mat-list-item> <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].hasError('required') || newUser.controls['password'].hasError('hasCapitalCase') ? '' : 'icon-success'}}">{{
+                      newUser.controls['password'].hasError('required') ||
+                      newUser.controls['password'].hasError('hasCapitalCase') ? 'radio_button_unchecked' :
+                      'check_circle' }}</mat-icon> <span> 1 uppercase letter (ABC)</span> </mat-list-item>
+                  <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].hasError('required') || newUser.controls['password'].hasError('hasNumber') ? '' : 'icon-success'}}">{{
+                      newUser.controls['password'].hasError('required') ||
+                      newUser.controls['password'].hasError('hasNumber') ? 'radio_button_unchecked' : 'check_circle'
+                      }}</mat-icon> <span> 1 number (123)</span> </mat-list-item> <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].hasError('required') || newUser.controls['password'].hasError('hasSpecialCharacters') ? '' : 'icon-success'}}">{{
+                      newUser.controls['password'].hasError('required') ||
+                      newUser.controls['password'].hasError('hasSpecialCharacters') ? 'radio_button_unchecked' :
+                      'check_circle' }}</mat-icon> <span> 1 special character (!@#)</span> </mat-list-item>
+                  <mat-list-item> <mat-icon
+                      class="{{ newUser.controls['password'].value === null || newUser.controls['password'].value === '' ? '' : newUser.controls['password'].hasError('hasSpace') ? 'icon-success' : 'icon-cancel' }} required-checks">{{
+                      newUser.controls['password'].value === null || newUser.controls['password'].value === '' ?
+                      'radio_button_unchecked' : newUser.controls['password'].hasError('hasSpace') ? 'check_circle':
+                      'cancel' }}</mat-icon> <span> <b>Don't</b> include <> or blank spaces</span> </mat-list-item>
+                  <mat-error *ngIf="additionalCriteriaFlag"> <mat-icon class="error-icon">error</mat-icon> Ensure all
+                    criteria is met </mat-error> </mat-list> </div>
+            </div> <mat-form-field appearance="outline" class="confirm-password"> <mat-label>Confirm Password
+                *</mat-label> <input type="password" matInput formControlName="confirmPassword"> <mat-error
+                *ngIf="newUser.controls['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password
+                required </mat-error> <mat-error
+                *ngIf="newUser.controls['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon>
+                Password must match </mat-error> </mat-form-field> <mat-form-field appearance="outline">
+              <mat-label>First Name *</mat-label> <input type="text" matInput formControlName="firstName"> <mat-error
+                *ngIf="newUser.controls['firstName'].hasError('required')"> <mat-icon>error</mat-icon> First name
+                required </mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Last Name
+                *</mat-label> <input type="text" matInput formControlName="lastName"> <mat-error
+                *ngIf="newUser.controls['lastName'].hasError('required')"> <mat-icon>error</mat-icon> Last name required
+              </mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Security question
+                1:</mat-label> <mat-select formControlName="question1"> <mat-option>None</mat-option> <mat-option
+                  value="option1">Option 1</mat-option> <mat-option value="option2">Option 2</mat-option> <mat-option
+                  value="option3">Option 3</mat-option> </mat-select> <mat-error
+                *ngIf="newUser.controls['question1'].hasError('required')"> <mat-icon>error</mat-icon>Select a
+                question</mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Answer for
+                question 1*</mat-label> <input type="text" matInput formControlName="answer1"> <mat-error
+                *ngIf="newUser.controls['answer1'].hasError('required')"> <mat-icon>error</mat-icon> Answer required
+              </mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Security question
+                2:</mat-label> <mat-select formControlName="question2"> <mat-option>None</mat-option> <mat-option
+                  value="option1">Option 1</mat-option> <mat-option value="option2">Option 2</mat-option> <mat-option
+                  value="option3">Option 3</mat-option> </mat-select> <mat-error
+                *ngIf="newUser.controls['question2'].hasError('required')"> <mat-icon>error</mat-icon>Select a
+                question</mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Answer for
+                question 2*</mat-label> <input type="text" matInput formControlName="answer2"> <mat-error
+                *ngIf="newUser.controls['answer2'].hasError('required')"> <mat-icon>error</mat-icon> Answer required
+              </mat-error> </mat-form-field>
+            <div class="btn-link"> <button type="submit" color="primary" mat-raised-button class="subBtn"
+                [disabled]="!newUser.valid"> Reset Password </button> <a routerLink="" class="back-login"> <span>Back to
+                  login</span> </a> </div>
+          </form>
+        </mat-card-content> </mat-card>
+    </div>
+  </div>
+</div> -->

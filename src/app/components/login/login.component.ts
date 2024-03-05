@@ -7,55 +7,66 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppWideService } from '../../services/app-wide.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatCardModule,MatFormFieldModule,FormsModule,MatButtonModule,MatInputModule,MatToolbarModule,ReactiveFormsModule],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule, FormsModule, MatButtonModule, MatInputModule, MatToolbarModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements  OnInit  {
+export class LoginComponent implements OnInit {
   createLoginForm!: FormGroup;
- 
-  constructor( private formBuilder: FormBuilder, private appwide :AppWideService,private router: Router){
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  constructor(private formBuilder: FormBuilder, private appwide: AppWideService, private router: Router, private snackBar: MatSnackBar) {
 
   }
-  
+
   ngOnInit() {
-
     this.createLoginForm = this.formBuilder.group({
-
-      userName: ['', Validators.required],
-
+      email: ['', Validators.required],
       password: ['', Validators.required]
-
     });
-
- 
-
   }
 
   onSubmit() {
-    //console.log("Hii")
-    const username = this.createLoginForm.get('userName')!.value;
+    const username = this.createLoginForm.get('email')!.value;
     const password = this.createLoginForm.get('password')!.value;
-    //console.log(username)
-
     this.appwide.authenticate(username, password).subscribe(authenticated => {
       if (authenticated) {
-        console.log('Login successful');
         this.appwide.login(username);
-
         // Redirect to the authenticated user's dashboard or home page
+        this.snackBar.open('Logged In successfully.', 'Close', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
         this.router.navigate(['/products']);
       } else {
-        console.log('Login failed');
-        // Display an error message or handle authentication failure
+        this.snackBar.open('Invalid User', 'Close', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
       }
     });
   }
 
-  
+  getFormErrorMessage(fieldName: string) {
+    if (fieldName == 'email') {
+      if (this.createLoginForm.get('email')?.hasError('required'))
+        return "Email Required"
+    }
+    if (fieldName == 'password') {
+      if (this.createLoginForm.get('password')?.hasError('required'))
+        return "password Required"
+    }
+    return null;
+  }
+
+
 
 }

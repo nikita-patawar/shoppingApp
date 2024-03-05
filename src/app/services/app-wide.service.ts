@@ -19,11 +19,9 @@ export class AppWideService {
   
 
   constructor(private http: HttpClient,private cookieService: CookieService) {
-    //console.log(this.getUsers())
   }
 
   getUsers(): Observable<any[]> {
-    //console.log(this.http.get<any[]>(this.usersUrl))
     return this.http.get<any[]>(this.usersUrl);
   }
 
@@ -31,8 +29,6 @@ export class AppWideService {
     //console.log("in service function call")
     return this.getUsers().pipe(
       map(users => {
-        //console.log(users)
-        //console.log(users + "" + username + "" + password)
         const authenticatedUser = users.find(user => user.email === username && user.password === password);
         return authenticatedUser;
       })

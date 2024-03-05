@@ -1,26 +1,66 @@
-<div class="wrapper">
+ <div class="wrapper">
   <div class="flex-container">
-    <div class="flex-item-left mat-elevation-z3">
-      <div class="login-image-container">
-        <img alt="Company Name Logo" src="../../../assets/shopping.png" class="login-image-size" />
-      </div>
-      <div class="main-div">
-        <mat-card class="mat-elevation-z3">
-          <mat-card-content>
-            <mat-toolbar class="toolbar">
-                <span>Register</span>
-            </mat-toolbar>
-            <div class="registration-form">
-              <form class="registratiom-form" [formGroup]="createRegistrationForm" >
-                <mat-form-field appearance="outline">
-                  <mat-label>Email Id:</mat-label>
-                   <input type="email" matInput formControlName="userName">
-                </mat-form-field>
-              </form>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      </div>
+    <div class="main">
+      <mat-card class="">
+        <mat-card-content>
+          <div class="register-image-container">
+            <img alt="Company Name Logo" src="../../../assets/logo" class="login-image-size" />
+          </div>
+          <mat-toolbar class="toolbar">
+            <span>New User Registration</span>
+          </mat-toolbar>
+          <div>
+            <form class="registratiom-form" [formGroup]="createRegistrationForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Id:</mat-label>
+                <input type="email" matInput formControlName="userName">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input type="{{ hide ? 'password' : 'text' }}" matInput formControlName="password">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>confirm password</mat-label>
+                <input type="password" matInput formControlName="confirmPassword">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Mobile Number </mat-label>
+                <input type="text" matInput formControlName="userName">
+              </mat-form-field>
+            </form>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+   
   </div>
-</div>
+</div> 
+<!-- <div class="wrapper">
+  <div class="flex-container mat-elevation-z4">
+    <div class="flex-item-right">
+      <div class="loginImg">
+        <img alt="Company Name Logo" src="../../../assets/logo" class="login-image-size" />
+      </div>
+        <mat-card class="main-div">
+          <mat-card-content>
+            <span>
+              New User Registration
+            </span>
+          </mat-card-content>
+          <div class="registration-form">
+            <form class="registratiom-form" [formGroup]="createRegistrationForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Email Id:</mat-label>
+                <input type="email" matInput formControlName="userName">
+              </mat-form-field>
+            </form>
+          </div>
+        </mat-card>
+      
+    </div>
+  </div>
+</div> -->

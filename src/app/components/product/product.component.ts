@@ -20,9 +20,9 @@ export class ProductComponent {
 
    }
 
-   viewDetails(product: any){
-    console.log(product)
-    this.router.navigate(['/productdetails',product]);
+   viewDetails(productId: any){
+    console.log(productId)
+    this.router.navigate(['/productdetails',productId]);
    }
 
 }
