@@ -39,7 +39,8 @@
             </mat-form-field>
             <div class="req-div">
               <div> <mat-list> <mat-list-item> <mat-icon
-                      class="{{ newUser.controls['password'].value === null || newUser.controls['password'].value === '' ? '' : isMinLength === false ? 'icon-cancel' : 'icon-success' }} required-checks">{{
+                      class="{{ newUser.controls['password'].value === null || newUser.controls['password'].value === '' ? '' : isMinLength === false ? 'icon-cancel' : 'icon-success' }} required-checks">
+                      {{
                       newUser.controls['password'].value === null || newUser.controls['password'].value === '' ?
                       'radio_button_unchecked' : isMinLength === false ? 'cancel' : 'check_circle' }}</mat-icon> <span>
                       Minimum 8 character</span> </mat-list-item>
@@ -68,12 +69,16 @@
                       'cancel' }}</mat-icon> <span> <b>Don't</b> include <> or blank spaces</span> </mat-list-item>
                   <mat-error *ngIf="additionalCriteriaFlag"> <mat-icon class="error-icon">error</mat-icon> Ensure all
                     criteria is met </mat-error> </mat-list> </div>
-            </div> <mat-form-field appearance="outline" class="confirm-password"> <mat-label>Confirm Password
-                *</mat-label> <input type="password" matInput formControlName="confirmPassword"> <mat-error
-                *ngIf="newUser.controls['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password
-                required </mat-error> <mat-error
-                *ngIf="newUser.controls['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon>
-                Password must match </mat-error> </mat-form-field> <mat-form-field appearance="outline">
+            </div>
+             <mat-form-field appearance="outline" class="confirm-password"> <mat-label>Confirm Password*</mat-label>
+                 <input type="password" matInput formControlName="confirmPassword"> 
+                 <mat-error *ngIf="newUser.controls['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password required </mat-error> 
+                 <mat-error *ngIf="newUser.controls['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon> Password must match </mat-error>
+                
+                </mat-form-field> 
+                
+                
+                <mat-form-field appearance="outline">
               <mat-label>First Name *</mat-label> <input type="text" matInput formControlName="firstName"> <mat-error
                 *ngIf="newUser.controls['firstName'].hasError('required')"> <mat-icon>error</mat-icon> First name
                 required </mat-error> </mat-form-field> <mat-form-field appearance="outline"> <mat-label>Last Name

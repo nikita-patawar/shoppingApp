@@ -39,6 +39,14 @@ export class AppWideService {
     return this.http.get<any[]>(this.getAllProducts)
    }
 
+   getProduct(id:number): Observable<any[]> {
+    return this.getProducts().pipe(map(users=>{
+      const productDetails=users.find(user => user.id == id)
+      console.log(productDetails)
+      return productDetails;
+    }))
+   }
+
    login(username: string): void {
     this.cookieService.set(STORAGE_KEY, 'true');
      this.cookieService.set(USER_KEY, username);

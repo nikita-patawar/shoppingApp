@@ -1,4 +1,4 @@
- <div class="wrapper">
+<div class="wrapper">
   <div class="flex-container">
     <div class="main">
       <mat-card class="">
@@ -10,7 +10,7 @@
             <span>New User Registration</span>
           </mat-toolbar>
           <div>
-            <form class="registratiom-form" [formGroup]="createRegistrationForm">
+            <form class="registratiom-form" [formGroup]="registratiomform" (ngSubmit)="register()" >
               <mat-form-field appearance="outline">
                 <mat-label>Email Id:</mat-label>
                 <input type="email" matInput formControlName="userName">
@@ -19,48 +19,56 @@
                 <mat-label>password</mat-label>
                 <input type="{{ hide ? 'password' : 'text' }}" matInput formControlName="password">
                 <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
                 </button>
               </mat-form-field>
+              <div class="req-div">
+                <div >
+                  <mat-list>
+                    <mat-list-item>
+                        <mat-icon> {{ f['password'].value === null || f['password'].value === '' ?
+                          'radio_button_unchecked' : 
+                          f['password'].errors?.['minlength']  ? 'cancel' : 'check_circle'}}</mat-icon>
+                        <span>Minimum 8 characters are required</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasSpecialChar==false  ?
+                        'radio_button_unchecked'  : 'check_circle'}}</mat-icon>
+                      <span>Minimum 1 Special characters are required</span>
+                   </mat-list-item>
+                    <mat-list-item>
+                    <mat-icon> {{ f['password'].errors?.['invalidPassword']?.nospaceandlessgreater==false  ?
+                      'check_circle'  : 'cancel'}}</mat-icon>
+                    <span>spaces and &lt not allowed</span>
+                   </mat-list-item> 
+                   <mat-list-item>
+                    <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasUpperCase==false  ?
+                      'radio_button_unchecked'  : 'check_circlel'}}</mat-icon>
+                    <span>Minimum 1 UpperCase characters are required</span>
+                 </mat-list-item>
+                  </mat-list>
+                </div>
+              </div>
               <mat-form-field appearance="outline">
                 <mat-label>confirm password</mat-label>
                 <input type="password" matInput formControlName="confirmPassword">
+                <mat-error *ngIf="f['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password required </mat-error> 
+                <mat-error *ngIf="f['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon> Password must match </mat-error>
+               
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Mobile Number </mat-label>
-                <input type="text" matInput formControlName="userName">
+                <input type="text" matInput formControlName="MobileNo">
               </mat-form-field>
+            <button type="submit" color="primary" mat-raised-button  class="subBtn" [disabled]="!registratiomform.valid">
+              Register
+           </button>
             </form>
           </div>
         </mat-card-content>
       </mat-card>
 
     </div>
-   
+
   </div>
-</div> 
-<!-- <div class="wrapper">
-  <div class="flex-container mat-elevation-z4">
-    <div class="flex-item-right">
-      <div class="loginImg">
-        <img alt="Company Name Logo" src="../../../assets/logo" class="login-image-size" />
-      </div>
-        <mat-card class="main-div">
-          <mat-card-content>
-            <span>
-              New User Registration
-            </span>
-          </mat-card-content>
-          <div class="registration-form">
-            <form class="registratiom-form" [formGroup]="createRegistrationForm">
-              <mat-form-field appearance="outline">
-                <mat-label>Email Id:</mat-label>
-                <input type="email" matInput formControlName="userName">
-              </mat-form-field>
-            </form>
-          </div>
-        </mat-card>
-      
-    </div>
-  </div>
-</div> -->
+</div>
