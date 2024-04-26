@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, Location } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +24,15 @@ import { MatListModule } from '@angular/material/list';
 export class RegisterComponent implements OnInit {
   registratiomform!: FormGroup;
   // isMinLength!: boolean;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   hide = true;
   private validatorForUsername = [
     Validators.required,
   ];
   id: number = 1;
   queryParams: any;
-  constructor(private formBuilder: FormBuilder, private appwide: AppWideService, private router: Router, private location: Location, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private appwide: AppWideService, private router: Router, private location: Location, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.queryParams = { ...this.route.snapshot.queryParams };
     console.log(this.route)
     // Set or update the query parameters
@@ -113,8 +116,29 @@ export class RegisterComponent implements OnInit {
         password:this.registratiomform.get('password')?.value,
         mobileno:this.registratiomform.get('MobileNo')?.value
       }
-      console.log(formToSubmit)
+      //console.log(form)
+      setTimeout(() => {
+        this.appwide.registerUser(formToSubmit)
+          .subscribe(response => {
+            console.log('Registration successful', response);
+            this.snackBar.open('Registration successfully.', 'Close', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000,
+            });
+            this.registratiomform.reset();
+            this.registratiomform.markAsPristine();
+            // Optionally, you can navigate to another page or display a success message here
+          }, error => {
+            this.snackBar.open('Registration failed.', 'Close', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+              duration: 3000
+            });
+            console.error('Registration failed', error);
+            // Handle the error (e.g., display an error message)
+          });
+      }, 2000); // 2000 milliseconds (2 seconds)
     }
-
   }
 }

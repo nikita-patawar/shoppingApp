@@ -15,6 +15,7 @@ export class AppWideService {
 
   private usersUrl =  'http://localhost:3000/users';
   private getAllProducts =  'http://localhost:3000/products';
+  private register = 'http://localhost:3000/registrationDetails';
 
   
 
@@ -63,5 +64,9 @@ export class AppWideService {
 
   getUsername(): string | null {
     return this.cookieService.get(USER_KEY);
+  }
+
+  registerUser(userData: any): Observable<any> {
+    return this.http.post(this.register, userData);
   }
 }

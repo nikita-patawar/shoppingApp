@@ -4,17 +4,18 @@ import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { AppWideService } from '../../services/app-wide.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule,MatListModule,MatButtonModule],
+  imports: [MatToolbarModule,MatListModule,MatButtonModule,MatIconModule,],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
-  constructor(private router: Router,private appwide :AppWideService){
+  constructor(private router: Router,public  appwide :AppWideService){
 
   }
 

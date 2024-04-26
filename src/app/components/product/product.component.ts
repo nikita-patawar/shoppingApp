@@ -25,4 +25,9 @@ export class ProductComponent {
     this.router.navigate(['/productdetails',productId]);
    }
 
+   addToCart(product:any){
+    console.log(product);
+
+   }
+
 }

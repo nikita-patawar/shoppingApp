@@ -12,6 +12,12 @@
     @if(!isLoggedIn()){
     <button mat-raised-button color="accent" (click)="register()">Register</button>
     }
+    <mat-icon>add_shopping_cart</mat-icon>
+    @if(isLoggedIn()){
+      <p>welcome    {{appwide.getUsername()}}</p>
+      <!-- Add more buttons as needed -->
+      }
+    
   </div>
 </mat-toolbar>
 
