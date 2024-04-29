@@ -24,4 +24,19 @@
     p{
       font-size: x-small;
     }
+
+    .cart-item-count {
+      position: absolute;
+      top: 1px;
+      right: 18px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }

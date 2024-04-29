@@ -2,20 +2,23 @@ import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AppWideService } from '../../services/app-wide.service';
 import { MatIconModule } from '@angular/material/icon';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule,MatListModule,MatButtonModule,MatIconModule,],
+  imports: [MatToolbarModule,MatListModule,MatButtonModule,MatIconModule,RouterModule,MatButtonModule, MatDialogModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
-  constructor(private router: Router,public  appwide :AppWideService){
+  constructor(private router: Router,public  appwide :AppWideService,private dialog: MatDialog, public cartItems: CartService){
 
   }
 
@@ -33,6 +36,18 @@ export class HeaderComponent {
 
   logIn(){
     this.router.navigate(['/login']);
+  }
+
+  openCart(): void {
+    // console.log( this.cartItems.cartItems())
+    const dialogRef = this.dialog.open(CartComponent, {
+      width: '600px', // Adjust width as needed
+      data: { cartItems: this.cartItems.cartItems() } // Pass cart items data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle any actions after the dialog is closed
+    });
   }
 }
 

@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Route, Router } from '@angular/router';
+import { Iproduct } from '../../interfaces/product';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -15,18 +17,20 @@ import { Route, Router } from '@angular/router';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent {
-   @Input() product: any;
-   constructor(private router: Router){
+   @Input()
+  product!: Iproduct;
+   constructor(private router: Router, private cartService: CartService){
 
    }
 
    viewDetails(productId: any){
     console.log(productId)
+
     this.router.navigate(['/productdetails',productId]);
    }
 
-   addToCart(product:any){
-    console.log(product);
+   addToCart(product:Iproduct){
+    this.cartService.addProductSignal(product)
 
    }
 

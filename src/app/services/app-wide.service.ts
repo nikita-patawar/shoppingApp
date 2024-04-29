@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, map } from 'rxjs';
+import { Iproduct } from '../interfaces/product';
 
 const STORAGE_KEY = 'userLoggedIn';
 const USER_KEY = 'username';
@@ -36,18 +37,22 @@ export class AppWideService {
     );
   }
 
-   getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.getAllProducts)
+   getProducts(): Observable<Iproduct[]> {
+    return this.http.get<Iproduct[]>(this.getAllProducts)
    }
 
-   getProduct(id:number): Observable<any[]> {
-    return this.getProducts().pipe(map(users=>{
-      const productDetails=users.find(user => user.id == id)
-      console.log(productDetails)
-      return productDetails;
-    }))
-   }
-
+   getProduct(id:number): Observable<Iproduct> {
+    return this.getProducts().pipe(
+      map(products => {
+        // Find the product with the given ID
+        const productDetails = products.find(product => product.id == id);
+        if (!productDetails) {
+          throw new Error(`Product with ID ${id} not found`);
+        }
+        return productDetails;
+      })
+    );
+  }
    login(username: string): void {
     this.cookieService.set(STORAGE_KEY, 'true');
      this.cookieService.set(USER_KEY, username);
