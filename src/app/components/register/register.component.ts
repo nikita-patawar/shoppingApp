@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AppWideService } from '../../services/app-wide.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -44,13 +44,19 @@ export class RegisterComponent implements OnInit {
       userName: ['', this.validatorForUsername],
       password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
       confirmPassword: ['', [Validators.required]],
-      MobileNo: ['', Validators.required]
+      MobileNo: ['', Validators.required],
+      skills:this.formBuilder.array([])
     });
+
+    
+
     console.log(this.registratiomform.controls)
 
     this.registratiomform.get('confirmPassword')?.valueChanges.subscribe(() => {
       this.passwordMatchValidator();
     });
+
+   
     // this.queryParams = { ...this.route.snapshot.queryParams };
     // // console.log(this.route)
     // this.queryParams['action'] = 'setusername';
@@ -71,6 +77,19 @@ export class RegisterComponent implements OnInit {
     return this.registratiomform.controls;
   }
 
+  get skills(): FormArray{
+    return this.registratiomform.get("skills") as FormArray
+  }
+
+  newSkill(): FormGroup{
+    return this.formBuilder.group({
+      skill:"",
+      exp:""
+    })    
+  }
+  addSkills(){
+    this.skills.push(this.newSkill)
+  }
   togglePasswordVisibility() {
     this.hide = !this.hide;
   }

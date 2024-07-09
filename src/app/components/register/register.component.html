@@ -10,7 +10,7 @@
             <span>New User Registration</span>
           </mat-toolbar>
           <div>
-            <form class="registratiom-form" [formGroup]="registratiomform" (ngSubmit)="register()" >
+            <form class="registratiom-form" [formGroup]="registratiomform" (ngSubmit)="register()">
               <mat-form-field appearance="outline">
                 <mat-label>Email Id:</mat-label>
                 <input type="email" matInput formControlName="userName">
@@ -23,46 +23,62 @@
                 </button>
               </mat-form-field>
               <div class="req-div">
-                <div >
+                <div>
                   <mat-list>
                     <mat-list-item>
-                        <mat-icon> {{ f['password'].value === null || f['password'].value === '' ?
-                          'radio_button_unchecked' : 
-                          f['password'].errors?.['minlength']  ? 'cancel' : 'check_circle'}}</mat-icon>
-                        <span>Minimum 8 characters are required</span>
+                      <mat-icon> {{ f['password'].value === null || f['password'].value === '' ?
+                        'radio_button_unchecked' :
+                        f['password'].errors?.['minlength'] ? 'cancel' : 'check_circle'}}</mat-icon>
+                      <span>Minimum 8 characters are required</span>
                     </mat-list-item>
                     <mat-list-item>
-                      <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasSpecialChar==false  ?
-                        'radio_button_unchecked'  : 'check_circle'}}</mat-icon>
+                      <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasSpecialChar==false ?
+                        'radio_button_unchecked' : 'check_circle'}}</mat-icon>
                       <span>Minimum 1 Special characters are required</span>
-                   </mat-list-item>
+                    </mat-list-item>
                     <mat-list-item>
-                    <mat-icon> {{ f['password'].errors?.['invalidPassword']?.nospaceandlessgreater==false  ?
-                      'check_circle'  : 'cancel'}}</mat-icon>
-                    <span>spaces and &lt not allowed</span>
-                   </mat-list-item> 
-                   <mat-list-item>
-                    <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasUpperCase==false  ?
-                      'radio_button_unchecked'  : 'check_circlel'}}</mat-icon>
-                    <span>Minimum 1 UpperCase characters are required</span>
-                 </mat-list-item>
+                      <mat-icon> {{ f['password'].errors?.['invalidPassword']?.nospaceandlessgreater==false ?
+                        'check_circle' : 'cancel'}}</mat-icon>
+                      <span>spaces and &lt not allowed</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                      <mat-icon> {{ f['password'].errors?.['invalidPassword']?.hasUpperCase==false ?
+                        'radio_button_unchecked' : 'check_circlel'}}</mat-icon>
+                      <span>Minimum 1 UpperCase characters are required</span>
+                    </mat-list-item>
                   </mat-list>
                 </div>
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>confirm password</mat-label>
                 <input type="password" matInput formControlName="confirmPassword">
-                <mat-error *ngIf="f['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password required </mat-error> 
-                <mat-error *ngIf="f['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon> Password must match </mat-error>
-               
+                <mat-error *ngIf="f['confirmPassword'].hasError('required')"> <mat-icon>error</mat-icon> Password
+                  required </mat-error>
+                <mat-error *ngIf="f['confirmPassword'].hasError('passwordNotMatch')"> <mat-icon>error</mat-icon>
+                  Password must match </mat-error>
+
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Mobile Number </mat-label>
                 <input type="text" matInput formControlName="MobileNo">
               </mat-form-field>
-            <button type="submit" color="primary" mat-raised-button  class="subBtn" [disabled]="!registratiomform.valid">
-              Register
-           </button>
+              <button type="button">AddSkill</button>
+              <div formArrayName="skills">
+                <div *ngFor="let skill of skills.controls; let i=index">
+                  <div [formGroupName]="i">
+                    {{i}}
+                    Skill Name:
+                    <input type="text" formControlName="skill">
+                    Exp:
+                    <input type="text" formControlName="exp">
+
+                  </div>
+                </div>
+              </div>
+              <button type="submit" color="primary" mat-raised-button class="subBtn"
+                [disabled]="!registratiomform.valid">
+                Register
+              </button>
             </form>
           </div>
         </mat-card-content>

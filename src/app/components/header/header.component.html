@@ -2,6 +2,9 @@
   <span class="app-title">Lets Do Shopping</span>
   <div class="spacer"></div>
   <div class="header-buttons">
+    <mat-form-field class="search-box">
+      <input matInput placeholder="Search products" class="inp" [(ngModel)]="searchTerm" (input)="search()">
+    </mat-form-field>
     @if(!isLoggedIn()){
     <button mat-raised-button color="accent" (click)="logIn()">Login</button>
     }

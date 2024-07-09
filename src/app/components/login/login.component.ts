@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppWideService } from '../../services/app-wide.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private formBuilder: FormBuilder, private appwide: AppWideService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder, private appwide: AppWideService, private router: Router, private snackBar: MatSnackBar,  public activatedRoute: ActivatedRoute,) {
 
   }
 
@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    console.log(this.router)
+    console.log(this.activatedRoute)
   }
 
   onSubmit() {

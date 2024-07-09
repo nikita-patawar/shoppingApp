@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,18 +8,32 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../../services/cart.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule,MatListModule,MatButtonModule,MatIconModule,RouterModule,MatButtonModule, MatDialogModule],
+  imports: [MatToolbarModule,FormsModule,MatInputModule,MatFormFieldModule,MatListModule,MatFormFieldModule,MatButtonModule,MatIconModule,RouterModule,MatButtonModule, MatDialogModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
+  searchTerm!: string;
+
+  //Output() searchEvent = new EventEmitter<string>();
+
+
   constructor(private router: Router,public  appwide :AppWideService,private dialog: MatDialog, public cartItems: CartService){
 
+  }
+
+  search(): void {
+    this.cartItems.setSearchTerm(this.searchTerm)
+    console.log(this.searchTerm)
+    
   }
 
   logout(){

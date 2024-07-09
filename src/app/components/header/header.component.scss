@@ -1,42 +1,52 @@
 .mat-toolbar {
-    display: flex;
-    justify-content: space-between;
- }
-  
-  .app-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+
+  .search-box 
+  {
+    width:174px;
+    margin-top: 20px;;
   }
-  
-  .spacer {
-    flex: 1;
+  .mat-form-field {
+    border-radius: 20px; // Adjust border-radius as needed
   }
-  
-  .header-buttons {
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 100px;
+  }
+
+  p {
+    font-size: x-small;
+  }
+
+  .cart-item-count {
+    position: absolute;
+    top: 1px;
+    right: 18px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
     display: flex;
-    gap: 20px;
-    justify-content: center;
     align-items: center;
-
-    button {
-        width:100px;
-    }
-    p{
-      font-size: x-small;
-    }
-
-    .cart-item-count {
-      position: absolute;
-      top: 1px;
-      right: 18px;
-      background-color: red;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      font-size: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    justify-content: center;
   }
+}

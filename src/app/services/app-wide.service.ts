@@ -41,17 +41,12 @@ export class AppWideService {
     return this.http.get<Iproduct[]>(this.getAllProducts)
    }
 
-   getProduct(id:number): Observable<Iproduct> {
-    return this.getProducts().pipe(
-      map(products => {
-        // Find the product with the given ID
-        const productDetails = products.find(product => product.id == id);
-        if (!productDetails) {
-          throw new Error(`Product with ID ${id} not found`);
-        }
-        return productDetails;
-      })
-    );
+   getProductById(productId: number): Observable<Iproduct> {
+    let url=`${this.getAllProducts}/${productId}`
+    console.log(url)
+    let pro= this.http.get<Iproduct>(url);
+    console.log(pro)
+    return pro
   }
    login(username: string): void {
     this.cookieService.set(STORAGE_KEY, 'true');

@@ -1,11 +1,14 @@
 import { Injectable, signal } from '@angular/core';
 import { Iproduct } from '../interfaces/product';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   public cartItems = signal<Iproduct[]>([]);
+  private searchTerm: BehaviorSubject<string> = new BehaviorSubject('');
 
   public products: Iproduct[]=[]
 
@@ -23,5 +26,13 @@ export class CartService {
       return val;
 
     })
+  }
+
+  getSearchTerm() {
+    return this.searchTerm.asObservable();
+  }
+
+  setSearchTerm(term: string) {
+    this.searchTerm.next(term);
   }
 }
